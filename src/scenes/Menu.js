@@ -1,36 +1,36 @@
 class Menu extends Phaser.Scene {
-    constructor() {
+  
+  constructor() {
         super("menuScene");
+         var timer1 = 0;
     }
     preload() {
+        //load backround
+        this.load.image('round', './assets/backround5.png');
         // load audio
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
     }
     create() {
+        
         // display menu text
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            backgroundColor: '#C00BE2',
+            color: '#3EBEFD',
             align: 'right',
             padding: {
-                top: 5,
-                bottom: 5,
+                top: 2,
+                bottom: 2,
             },
             fixedWidth: 0
         }
         let centerX = game.config.width/2;
-        let centerY = game.config.height/2;
-        let textSpacer = 64;
-
-        this.add.text(centerX, centerY- textSpacer, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(centerX, centerY, 'Use ←→ arrows to move & (F) to Fire', menuConfig).setOrigin(0.5);
-        menuConfig.backgroundColor = '#00FF00';
-        menuConfig.color = '#000';
-        this.add.text(centerX, centerY + textSpacer, 'Press ← for Easy or → for Hard', menuConfig).setOrigin(0.5);  
+        this.add.image(320, 240, 'round');
+        this.add.text(centerX, 15, 'Use ←→ arrows to move & (F) to Fire', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, 465, 'Press ← for Easy or → for Hard', menuConfig).setOrigin(0.5);  
         
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -41,6 +41,9 @@ class Menu extends Phaser.Scene {
         this.scene.start("playScene");*/
     }
     update() {
+        
+        //use to make text blink
+        //console.log (this.timer1);
         if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
           // easy mode
           game.settings = {
@@ -51,6 +54,7 @@ class Menu extends Phaser.Scene {
           this.scene.start("playScene");    
         }
         if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
+          timer = 0;
           // hard mode
           game.settings = {
             spaceshipSpeed: 4,
