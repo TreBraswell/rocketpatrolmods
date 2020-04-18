@@ -51,7 +51,8 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
-        this.uzis = this.add.particles('flares').createEmitter({"active":true,"blendMode":1,"collideBottom":true,"collideLeft":true,"collideRight":true,"collideTop":true,"deathCallback":null,"deathCallbackScope":null,"emitCallback":null,"emitCallbackScope":null,"follow":null,"frequency":0,"gravityX":0,"gravityY":9000,"maxParticles":0,"name":"","on":true,"particleBringToTop":true,"radial":true,"timeScale":1,"trackVisible":false,"visible":true,"accelerationX":0,"accelerationY":0,"angle":{"min":-110,"max":-70},"alpha":1,"bounce":0,"delay":0,"lifespan":{"min":1000,"max":2000},"maxVelocityX":10000,"maxVelocityY":10000,"moveToX":0,"moveToY":0,"quantity":1,"rotate":0,"scaleX":1,"scaleY":1,"tint":92949972959,"x":600,"y":100,"speed":400});
+        //makes our particle for uzi
+        this.uzis = this.add.particles('flares').createEmitter({"active":true,"blendMode":0,"collideBottom":true,"collideLeft":true,"collideRight":true,"collideTop":true,"deathCallback":null,"deathCallbackScope":null,"emitCallback":null,"emitCallbackScope":null,"follow":null,"frequency":0,"gravityX":0,"gravityY":5000,"maxParticles":200,"name":"","on":true,"particleBringToTop":true,"radial":true,"timeScale":1,"trackVisible":false,"visible":true,"accelerationX":0,"accelerationY":0,"angle":{"min":-110,"max":-70},"alpha":1,"bounce":0,"delay":0,"lifespan":{"min":500,"max":900},"maxVelocityX":10000,"maxVelocityY":100,"moveToX":0,"moveToY":0,"quantity":1,"rotate":0,"scaleX":1,"scaleY":1,"tint":0,"x":0,"y":0,"speed":400});
         this.p1Score = 0;
                 // score display
                 let scoreConfig = {
@@ -77,8 +78,15 @@ class Play extends Phaser.Scene {
             }
     
     update() {
-        this.uzis.setPosition(this.p1Rocket.x+70, this.p1Rocket.y+100);
-        
+        this.uzis.setPosition(this.p1Rocket.x+70, this.p1Rocket.y+93);
+        this.uzis.setTint(0x31144C);
+        if(this.p1Rocket.isFiring)
+        {
+            this.uzis.setVisible(true);
+        }
+        else{
+            this.uzis.setVisible(false); 
+        }
         if (this.gameOver && (Phaser.Input.Keyboard.JustDown(keyF))) {
             this.scene.restart(this.p1Score);
         }
