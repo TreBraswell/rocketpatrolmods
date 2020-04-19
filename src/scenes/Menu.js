@@ -8,7 +8,8 @@ class Menu extends Phaser.Scene {
         //load backround
         this.load.image('round', './assets/backround5.png');
         // load audio
-        this.load.audio('sfx_select', './assets/blip_select12.wav');
+
+        this.load.audio('sfx_select', './assets/ooh.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
     }

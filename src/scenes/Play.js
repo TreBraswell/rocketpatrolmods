@@ -4,10 +4,15 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
+        //load boom
+        this.load.audio('boom', './assets/yeahsmall.wav');
+        this.load.audio('boom1', './assets/reset.wav');
+        this.load.audio('1', './assets/yah.wav');
         //load uzis
         this.load.atlas('flares', './assets/uzi3.png', './assets/flares.json');
         this.load.json('emitter', './assets/emitter.json'); // see './particle editor.js'
         // load images/tile sprite
+        this.load.image('spark0', 'assets/DirtySprite.png');
         this.load.image('gn', './assets/generationnow2.png');
         this.load.image('rocket', './assets/rocket.png');
         this.load.image('rich', './assets/rich10.png');
@@ -53,6 +58,20 @@ class Play extends Phaser.Scene {
         });
         //makes our particle for uzi
         this.uzis = this.add.particles('flares').createEmitter({"active":true,"blendMode":0,"collideBottom":true,"collideLeft":true,"collideRight":true,"collideTop":true,"deathCallback":null,"deathCallbackScope":null,"emitCallback":null,"emitCallbackScope":null,"follow":null,"frequency":0,"gravityX":0,"gravityY":5000,"maxParticles":200,"name":"","on":true,"particleBringToTop":true,"radial":true,"timeScale":1,"trackVisible":false,"visible":true,"accelerationX":0,"accelerationY":0,"angle":{"min":-110,"max":-70},"alpha":1,"bounce":0,"delay":0,"lifespan":{"min":500,"max":900},"maxVelocityX":10000,"maxVelocityY":100,"moveToX":0,"moveToY":0,"quantity":1,"rotate":0,"scaleX":1,"scaleY":1,"tint":0,"x":0,"y":0,"speed":400});
+        this.explosion = this.add.particles('spark0').createEmitter({
+            x: 1000,
+            y: 3000,
+            speed: { min: -800, max: 800 },
+            angle: { min: 0, max: 360 },
+            scale: { start: 1, end: 0 },
+            blendMode: 'SCREEN',
+            //active: false,
+            lifespan: 600,
+            gravityY: 800,
+            quantity:10
+
+        });
+        this.explosion.explode();
         this.p1Score = 0;
                 // score display
                 let scoreConfig = {
@@ -133,16 +152,20 @@ class Play extends Phaser.Scene {
     shipExplode(ship) {
         ship.alpha = 0;                         // temporarily hide ship
         // create explosion sprite at ship's position
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
+        this.explosion.setPosition(ship.x,ship.y);
+        this.explosion.explode();
+        ship.reset();  
+        ship.alpha = 1; 
+        /*let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
         boom.anims.play('explode');             // play explode animation
         boom.on('animationcomplete', () => {    // callback after animation completes
             ship.reset();                       // reset ship position
             ship.alpha = 1;                     // make ship visible again
             boom.destroy();                     // remove explosion sprite
-        });
+        });*/
         // score increment and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;   
-        this.sound.play('sfx_explosion');     
+        this.sound.play('boom');     
     }
 }
