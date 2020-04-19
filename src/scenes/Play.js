@@ -5,9 +5,37 @@ class Play extends Phaser.Scene {
 
     preload() {
         //load boom
-        this.load.audio('boom', './assets/yeahsmall.wav');
+        this.load.audio('boom', './assets/fire1.wav');
         this.load.audio('boom1', './assets/reset.wav');
-        this.load.audio('1', './assets/yah.wav');
+        //tracks
+        this.load.audio('1', './assets/babypluto.wav');
+        this.load.audio('2', './assets/lomein.wav');
+        this.load.audio('3', './assets/sillywatch.wav');
+        this.load.audio('4', './assets/pop.wav');
+        this.load.audio('5', './assets/youbettermove.wav');
+        this.load.audio('6', './assets/homecoming.wav');
+        this.load.audio('7', './assets/imsorry.wav');
+        this.load.audio('8', './assets/celebrationstation.wav');
+        this.load.audio('9', './assets/biggerthanlife.wav');
+        this.load.audio('10', './assets/chromehearttags.wav');
+        this.load.audio('11', './assets/bustme.wav');
+        this.load.audio('12', './assets/prices.wav');
+        this.load.audio('13', './assets/urgency.wav');
+        this.load.audio('14', './assets/venetia.wav');
+        this.load.audio('15', './assets/secure.wav');
+        this.load.audio('16', './assets/p2.wav');
+        this.load.audio('17', './assets/futsalshuffle.wav');
+        this.load.audio('18', './assets/thatway.wav');
+        //explosion sounds
+        this.load.audio('20', './assets/yah.wav');
+        this.load.audio('21', './assets/yah2.wav');
+        this.load.audio('22', './assets/yah3.wav');
+        this.load.audio('23', './assets/yeah.wav');
+        this.load.audio('24', './assets/yeah2.wav');
+        this.load.audio('25', './assets/yuh.wav');
+        this.load.audio('26', './assets/yuh2.wav');
+        this.load.audio('27', './assets/yuh3.wav');
+        this.load.audio('28', './assets/yuh4.wav');
         //load uzis
         this.load.atlas('flares', './assets/uzi3.png', './assets/flares.json');
         this.load.json('emitter', './assets/emitter.json'); // see './particle editor.js'
@@ -166,6 +194,7 @@ class Play extends Phaser.Scene {
         // score increment and repaint
         this.p1Score += ship.points;
         this.scoreLeft.text = this.p1Score;   
-        this.sound.play('boom');     
+        var space  = Math.round(Math.random()*8)+20;
+        this.sound.play(space.toString());     
     }
 }
