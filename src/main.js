@@ -11,12 +11,11 @@ function create()
     game.input.mouse.capture = true;
 }
 game.settings = {
-    spaceshipSpeed: 3,
-    gameTimer: 60000    
+    spaceshipSpeed: 3   
 }
 
 // reserve some keyboard variables
-let keyF, keyLEFT, keyRIGHT;
+let keyF, keyLEFT, keyRIGHT,keyPrev,keyNext,keyB;
 function update()
 {
     game.mousedown = game.input.activePointer.leftButton.isDown;
